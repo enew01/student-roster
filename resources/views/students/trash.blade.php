@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto py-6">
-    <h1 class="text-2xl font-bold mb-4">Trash Bin</h1>
+    <h2 class="text-2xl font-bold mb-4 text-white text-center">Trash Bin</h2>
 
     @if(session('success'))
         <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
@@ -12,7 +12,7 @@
 
     <table class="table-auto w-full border-collapse border border-gray-300">
         <thead>
-            <tr class="bg-gray-100">
+            <tr class="bg-black text-white">
                 <th class="border px-4 py-2">ID</th>
                 <th class="border px-4 py-2">Name</th>
                 <th class="border px-4 py-2">Email</th>
@@ -22,12 +22,12 @@
         </thead>
         <tbody>
             @forelse($students as $student)
-                <tr>
-                    <td class="border px-4 py-2">{{ $student->id }}</td>
-                    <td class="border px-4 py-2">{{ $student->name }}</td>
-                    <td class="border px-4 py-2">{{ $student->email }}</td>
-                    <td class="border px-4 py-2">{{ $student->deleted_at->format('M d, Y H:i') }}</td>
-                    <td class="border px-4 py-2">
+                <tr class="bg-white">
+                    <td class="border border-black px-4 py-2">{{ $student->id }}</td>
+                    <td class="border border-black px-4 py-2">{{ $student->name }}</td>
+                    <td class="border border-black px-4 py-2">{{ $student->email }}</td>
+                    <td class="border border-black px-4 py-2">{{ $student->deleted_at->format('M d, Y H:i') }}</td>
+                    <td class="border border-black px-4 py-2 flex flex-row justify-between">
                         <form action="{{ route('students.restore', $student->id) }}" method="POST" style="display:inline;">
                             @csrf
                             <button type="submit" class="bg-green-500 hover:bg-green-600  px-3 py-1 rounded">
@@ -47,7 +47,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center py-4">No students in trash.</td>
+                    <td colspan="5" class="text-center py-4 bg-white text-black">No students in trash.</td>
                 </tr>
             @endforelse
         </tbody>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="mt-6">
-        <a href="{{ route('students.index') }}" class="text-blue-500 hover:underline">← Back to Students</a>
+        <a href="{{ route('students.index') }}" class="text-white underline hover:text-gray-300">← Back to Students</a>
     </div>
 </div>
 @endsection

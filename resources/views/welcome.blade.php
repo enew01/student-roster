@@ -21,20 +21,36 @@
             </style>
         @endif
     </head>
-    <body class="bg-gray-800 flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden justify-start">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
+    <body class="bg-gray-800 flex p-6 lg:p-8 min-h-screen flex-col">
+        <header class="w-full justify-end text-sm mb-6 not-has-[nav]:hidden flex ">
+            @auth
+                <nav class="flex items-center self-start justify-self-end gap-4">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-link nav-link">Logout</button>
+                        <button type="submit" class="btn btn-link nav-link bg-white p-3 rounded hover:bg-gray-400 focus:bg-white">Logout</button>
                     </form>
                 </nav>
-            @endif
+            @endauth
+            @guest
+                <nav class="flex items-center self-start justify-self-end gap-4">
+                    <a href="{{ route('login') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-link nav-link bg-white p-3 rounded hover:bg-gray-400 focus:bg-white">Login/Register</button>
+                    </a>
+                </nav>
+            @endguest
         </header>
-        <div class="mt-6 flex justify-center items-center flex-col">
-            <h1 class="nav-item"><span class=" text-xl font-bold text-white">Welcome, {{ Auth::user()->name }}</span></h1>
-            <a href="{{ route('students.index') }}" class="text-blue-500 hover:underline">Go to Roster</a>
+        <div class="mt-6 flex justify-center items-center flex-col self-center">
+            @auth
+            <h1 class="nav-item"><span class=" text-4xl font-bold text-white">Welcome, {{ Auth::user()->name }}</span></h1>
+            <a class="mt-5" href="{{ route('students.index') }}">
+                <button type="submit" class="btn btn-link nav-link bg-white p-3 rounded hover:bg-gray-400 focus:bg-white">Go to Student Roster</button>
+            </a>
+            @endauth
+            @guest
+            <h1 class="nav-item"><span class="text-4xl font-bold text-white">Welcome, guest</span></h1>
+            <p class="text-white text-md">You must <a class="underline hover:text-gray-300" href="{{ route('login') }}">Login or Register</a> to view the Student Roster</p>
+            @endguest
         </div>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>

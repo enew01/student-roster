@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Edit Student</h1>
+<div class="">
+    <h2 class="text-white text-xl text-center mt-4 font-bold">Edit Student</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -18,22 +18,22 @@
         @csrf
         @method('PUT')
 
-        <div>
-            <label for="name">Name:</label>
+        
+            <label class="text-white" for="name">Name:</label><br>
             <input type="text" name="name" value="{{ old('name', $student->name) }}" required>
-        </div>
+            <br><br>
 
-        <div>
-            <label for="email">Email:</label>
+        
+            <label class="text-white" for="email">Email:</label><br>
             <input type="email" name="email" value="{{ old('email', $student->email) }}" required>
-        </div>
+            <br><br>
 
-        <div>
-            <label for="dob">Date of Birth:</label>
+        
+            <label class="text-white" for="dob">Date of Birth:</label><br>
             <input type="date" name="dob" value="{{ old('dob', $student->dob->format('Y-m-d')) }}" required>
-        </div>
+            <br><br>
 
-        <button type="submit">Update</button>
+        <button type="submit" class="mb-4 bg-white p-1 rounded hover:bg-gray-400 focus:bg-white p-2">Update</button>
     </form>
 </div>
 @endsection
